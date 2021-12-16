@@ -1,0 +1,269 @@
+1-Linear Regression using single variable
+import numpy as np
+import pandas as pd
+from sklearn.linear_model import LinearRegression
+from sklearn.metrics import mean_squared_error
+data=pd.read_csv('/headbrain.csv')
+data.head()
+
+
+#Collecting X and Y
+X=data['Head Size(cm^3)'].values
+Y=data['Brain Weight(grams)'].values
+data.iloc[0:5,0:1]
+
+#data.iloc[0:5,0:1]
+m=len(X)
+X=X.reshape((m,1))
+#Model Initialisation
+reg=LinearRegression()
+#Data Fitting
+reg=reg.fit(X,Y)
+#Y prediction
+Y_pred=reg.predict(X)
+print(Y_pred)
+
+m=len(X)
+X=X.reshape((m,1))
+#Model Initialisation
+reg=LinearRegression()
+#Data Fitting
+reg=reg.fit(X,Y)
+#Y prediction
+Y_pred=reg.predict(X)
+print(Y)
+
+#data.iloc[0:5,0:1]
+m=len(X)
+X=X.reshape((m,1))
+#Model Initialisation
+reg=LinearRegression()
+#Data Fitting
+reg=reg.fit(X,Y)
+#Y prediction
+Y_pred=reg.predict(X)
+print('Intercept: \n',reg.intercept_)
+print('Coefficients: \n',reg.coef_)
+
+#Model Evaluation
+rmse=np.sqrt(mean_squared_error(Y,Y_pred))
+r2=reg.score(X,Y)
+print("RMSE")
+print(rmse)
+print("R2 score")
+print(r2)
+
+
+
+2-Linear Regression using multiple variable
+import numpy as np
+import pandas as pd
+from sklearn.linear_model import LinearRegression
+from sklearn.metrics import mean_squared_error
+data=pd.read_csv('//content/50_Startups.csv')
+data.head()
+
+#Coolecting X and Y
+X=data[['R&D Spend','Marketing Spend','Administration']].values
+Y=data['Profit'].values
+print(X)
+print(Y)
+
+
+#Model Initialisation
+reg=LinearRegression()
+#Data Fitting
+reg=reg.fit(X,Y)
+#Y prediction
+Y_pred=reg.predict(X)
+print(Y)
+
+
+print('Intercept: \n',reg.intercept_)
+print('Coefficients: \n',reg.coef_)
+
+
+#Model Evaluation
+rmse=np.sqrt(mean_squared_error(Y,Y_pred))
+r2=reg.score(X,Y)
+print("RMSE")
+print(rmse)
+print("R2 score")
+print(r2)
+3-Decision Tree
+
+import numpy as np
+import pandas as pd
+from sklearn.linear_model import LinearRegression
+from sklearn.metrics import mean_squared_error
+data=pd.read_csv('/content/diabetes.csv')
+data.head()
+
+X=data[['Pregnancies','Glucose','BloodPressure','SkinThickness','Insulin','BMI','DiabetesPedigreeFunction','Age']].values
+Y=data['Outcome'].values
+print(X)
+print(Y)
+
+X=data[['Pregnancies','Glucose','BloodPressure','SkinThickness','Insulin','BMI','DiabetesPedigreeFunction','Age']].values
+Y=data['Outcome'].values
+from sklearn.model_selection import train_test_split
+
+X_train,X_test,Y_train,Y_test=train_test_split(X,Y,test_size=0.25,random_state=0)
+
+
+from sklearn.tree import DecisionTreeClassifier
+model=DecisionTreeClassifier()
+model.fit(X_train,Y_train)
+
+
+predictions=logmodel.predict(X_test)
+from sklearn.metrics import classification_report
+print(predictions)
+print(Y_test)
+
+import  matplotlib.pyplot as plt
+
+from sklearn.metrics import confusion_matrix
+from sklearn.metrics import plot_confusion_matrix
+plot_confusion_matrix(model,X_test,Y_test)
+plt.show()
+confusion_matrix(Y_test,predictions)
+
+
+print(classification_report(Y_test,predictions))
+4-SVM
+from sklearn.svm import SVC
+import numpy as np
+import pandas as pd
+from sklearn.metrics import mean_squared_error
+data=pd.read_csv('/content/diabetes.csv')
+data.head()
+
+X=data[['Pregnancies','Glucose','BloodPressure','SkinThickness','Insulin','BMI','DiabetesPedigreeFunction','Age']].values
+Y=data['Outcome'].values
+print(X)
+print(Y)
+
+
+X=data[['Pregnancies','Glucose','BloodPressure','SkinThickness','Insulin','BMI','DiabetesPedigreeFunction','Age']].values
+Y=data['Outcome'].values
+from sklearn.model_selection import train_test_split
+
+X_train,X_test,Y_train,Y_test=train_test_split(X,Y,test_size=0.25,random_state=0)
+
+from sklearn.svm import SVC
+model=SVC(kernel='linear')
+model.fit(X_train,Y_train)
+
+predictions=model.predict(X_test)
+from sklearn.metrics import classification_report
+print(predictions)
+print(Y_test)
+
+import  matplotlib.pyplot as plt
+
+from sklearn.metrics import confusion_matrix
+from sklearn.metrics import plot_confusion_matrix
+plot_confusion_matrix(model,X_test,Y_test)
+plt.show()
+confusion_matrix(Y_test,predictions)
+
+
+print(classification_report(Y_test,predictions))
+5-Naive Baye's Theorem
+
+from sklearn.naive_bayes import GaussianNB
+import numpy as np
+import pandas as pd
+from sklearn.linear_model import LogisticRegression
+from sklearn.metrics import mean_squared_error
+data=pd.read_csv('/content/diabetes.csv')
+data.head()
+
+X=data[['Pregnancies','Glucose','BloodPressure','SkinThickness','Insulin','BMI','DiabetesPedigreeFunction','Age']].values
+Y=data['Outcome'].values
+print(X)
+print(Y)
+
+X=data[['Pregnancies','Glucose','BloodPressure','SkinThickness','Insulin','BMI','DiabetesPedigreeFunction','Age']].values
+Y=data['Outcome'].values
+from sklearn.model_selection import train_test_split
+
+X_train,X_test,Y_train,Y_test=train_test_split(X,Y,test_size=0.25,random_state=0)
+
+from sklearn.tree import DecisionTreeClassifier
+model=DecisionTreeClassifier()
+model.fit(X_train,Y_train)
+
+predictions=model.predict(X_test)
+from sklearn.metrics import classification_report
+print(predictions)
+print(Y_test)
+
+import  matplotlib.pyplot as plt
+
+from sklearn.metrics import confusion_matrix
+from sklearn.metrics import plot_confusion_matrix
+plot_confusion_matrix(model,X_test,Y_test)
+plt.show()
+confusion_matrix(Y_test,predictions)
+
+print(classification_report(Y_test,predictions))
+
+6-Logictic Regression using gradient Descent
+import numpy as np
+import pandas as pd
+from sklearn.linear_model import LinearRegression
+from sklearn.metrics import mean_squared_error
+data=pd.read_csv('/content/diabetes.csv')
+data.head()
+
+
+#Colleting of X and Y
+X=data[['Pregnancies','Glucose','BloodPressure','SkinThickness','Insulin','BMI','DiabetesPedigreeFunction','Age']].values
+Y=data['Outcome'].values
+print(X)
+print(Y)
+
+
+# Model Initialization
+reg = LinearRegression()
+# Data Fitting
+reg = reg.fit(X,Y)
+# y prediction
+Y_pred = reg.predict(X)
+print(Y_pred)
+
+print('Intercept: \n', reg.intercept_)
+print('Coefficient:\n', reg.coef_)
+
+# Model Evaluation
+rmse = np.sqrt(mean_squared_error(Y,Y_pred))
+r2 = reg.score(X,Y)
+print("RMSE")
+print(rmse)
+print("R2")
+print(r2)
+
+X=data[['Pregnancies','Glucose','BloodPressure','SkinThickness','Insulin','BMI','DiabetesPedigreeFunction','Age']].values
+Y=data['Outcome'].values
+from sklearn.model_selection import train_test_split
+
+X_train,X_test,Y_train,Y_test=train_test_split(X,Y,test_size=0.3,random_state=101)
+
+from sklearn.linear_model import LogisticRegression
+
+logmodel=LogisticRegression()
+logmodel.fit(X_train,Y_train)
+
+import  matplotlib.pyplot as plt
+
+from sklearn.metrics import confusion_matrix
+from sklearn.metrics import plot_confusion_matrix
+plot_confusion_matrix(logmodel,X_test,Y_test)
+plt.show()
+
+from sklearn.metrics import classification_report
+print(classification_report(Y_test,predictions))
+
+
